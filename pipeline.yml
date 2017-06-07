@@ -1,14 +1,15 @@
+---
+resources:
+- name: git-pipeline
+  type: git
+  source:
+    uri: https://github.com/ferozjilla/onboarding-pipeline.git
+
 jobs:
 - name: empty-box
   plan:
+  - get: git-pipeline
+    trigger: true
   - task: echo
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source: {repository: busybox}
-      run:
-        path: echo
-        args:
-        - "it's all a lie"
+    file: git-pipeline/tasks/echo.yml
 
