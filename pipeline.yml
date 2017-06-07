@@ -1,0 +1,14 @@
+jobs:
+- name: empty-box
+  plan:
+  - task: echo
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: busybox}
+      run:
+        path: echo
+        args:
+        - "it's all a lie"
+
