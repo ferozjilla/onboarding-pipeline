@@ -5,11 +5,20 @@ resources:
   source:
     uri: https://github.com/ferozjilla/onboarding-pipeline.git
 
+- name: echo-app
+  type: docker-image
+  source:
+    repository: <username>/echo-app
+    username: <username>
+    password: <password>
+
 jobs:
 - name: empty-box
   plan:
   - get: git-pipeline
     trigger: true
+  - put: echo-app
+    params: {build: git-pipeline}
   - task: echo
     file: git-pipeline/tasks/echo.yml
 
